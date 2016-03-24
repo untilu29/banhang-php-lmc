@@ -17,9 +17,9 @@
             <label class="col-sm-2 control-label no-padding-right" for="category_id">Category</label>
             <div class="col-sm-9">
                 <select name="category_id" class="col-xs-10 col-sm-5">
-                    <?php while ($category = mysql_fetch_array($vResult_PL))
-                         ?>
-                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                    <?php while ($row = mysql_fetch_array($vResult_PL)) { ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                    <?php }?>
                 </select>
                 <span class="error"></span>
             </div>
@@ -36,6 +36,48 @@
             <label class="col-sm-2 control-label no-padding-right">Price</label>
             <div class="col-sm-9">
                 <input class="col-xs-10 col-sm-5" name="price" type="number" placeholder="Price"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">Operating System</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-5" name="os" placeholder="Operating System" type="text"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">Screen</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-5" name="screen" placeholder="Screen" type="text"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">CPU</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-5" name="cpu" placeholder="CPU" type="text"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">Ram</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-5" name="ram" placeholder="RAM" type="text"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">Camera</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-5" name="camera" placeholder="Camera" type="text"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label no-padding-right">Pin</label>
+            <div class="col-sm-9">
+                <input class="col-xs-10 col-sm-5" name="pin" placeholder="PIN" type="text"/>
             </div>
         </div>
 

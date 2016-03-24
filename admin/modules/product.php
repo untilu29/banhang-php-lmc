@@ -37,7 +37,7 @@ $vSQL_Sel = "SELECT a.*, b.name as cate_name FROM product as a
 $vResult_Sel = mysql_query($vSQL_Sel);
 
 //Truy vấn các loại sản phẩm đưa ra trang thêm
-$vSQL_PL = "SELECT * FROM category ORDER BY Possition ASC";
+$vSQL_PL = "SELECT * FROM category ORDER BY position ASC";
 $vResult_PL = mysql_query($vSQL_PL);
 ?>
 
