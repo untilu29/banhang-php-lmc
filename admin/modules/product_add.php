@@ -5,7 +5,7 @@
 </div><!-- /.page-header -->
 
 <fieldset>
-    <form action="controllers/category.php" class="form-horizontal" method="POST">
+    <form action="controllers/category.php" id="form" class="form-horizontal" method="POST">
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right" for="name">Category name<span class="required">(*)</span></label>
             <div class="col-sm-9">
@@ -14,43 +14,39 @@
         </div>    
 
         <div class="form-group">
-                <label class="col-sm-2 control-label no-padding-right" for="category_id">Category</label>
-                <div class="col-sm-9">
-                    <select name="category_id" class="col-xs-10 col-sm-5">
-                        <?php while ($category= mysql_fetch_array($vResult_PL))?>
-                        <option value="<?=$category['id']?>"><?=$category['name']?></option>
-                    </select>
-                    <span class="error"></span>
-                </div>
+            <label class="col-sm-2 control-label no-padding-right" for="category_id">Category</label>
+            <div class="col-sm-9">
+                <select name="category_id" class="col-xs-10 col-sm-5">
+                    <?php while ($category = mysql_fetch_array($vResult_PL))
+                         ?>
+                    <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                </select>
+                <span class="error"></span>
+            </div>
         </div>
-        
+
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right">SKU</label>
             <div class="col-sm-9">
-                <input class="col-xs-10 col-sm-5" name="sku" placeholder="SKU"/>
+                <input class="col-xs-10 col-sm-5" name="sku" placeholder="SKU" type="text"/>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right">Price</label>
             <div class="col-sm-9">
                 <input class="col-xs-10 col-sm-5" name="price" type="number" placeholder="Price"/>
             </div>
         </div>
-        
+
         <div class="form-group"><div>
                 <label class="col-sm-2 control-label no-padding-right" for="content">Hình ảnh</label>
-                    <div class="col-sm-9">
-                        <form action="../dummy.html" class="dropzone" id="dropzone">
-										<div class="fallback">
-											<input name="file" type="file" multiple="" />
-										</div>
-									</form>
-
-                    </div>
+                <div class="col-sm-3">
+                    <input name="image" type="file" multiple="" id="file" />
                 </div>
+            </div>
         </div>
-        
+
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right">Description</label>
             <div class="col-sm-9">
@@ -76,3 +72,56 @@
     </form>
     <a href="javascript:history.back();" class="btn btn-grey" title="Trở về trang trước"><span>Go back</span></button></a>
 </fieldset>
+
+<script src="../assets/js/jquery.js"></script>        
+<script src="../assets/js/ace/elements.fileinput.js"></script>
+<script>
+    //Upload anh drop/ace
+    jQuery(function ($) {
+        var $form = $("#form");
+        var file_input = $form.find('input[type=file]');
+        var upload_in_progress = false;
+
+        file_input.ace_file_input({
+            style: 'well',
+            btn_choose: 'Select or drop files here',
+            btn_change: null,
+            droppable: true,
+            thumbnail: 'large',
+            maxSize: 1100000, //bytes
+            allowExt: ["jpeg", "jpg", "png", "gif"],
+            allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif"],
+            before_remove: function () {
+                if (upload_in_progress)
+                    return false;//if we are in the middle of uploading a file, don't allow resetting file input
+                return true;
+            },
+            preview_error: function (filename, code) {
+                //code = 1 means file load error
+                //code = 2 image load error (possibly file is not an image)
+                //code = 3 preview failed
+            }
+        })
+        file_input.on('file.error.ace', function (ev, info) {
+            if (info.error_count['ext'] || info.error_count['mime'])
+                alert('Invalid file type! Please select an image!');
+            if (info.error_count['size'])
+                alert('Invalid file size! Maximum 1MB');
+
+            //you can reset previous selection on error
+            //ev.preventDefault();
+            //file_input.ace_file_input('reset_input');
+        });
+
+
+        //when "reset" button of form is hit, file field will be reset, but the custom UI won't
+        //so you should reset the ui on your own
+        $form.on('reset', function () {
+            $(this).find('input[type=file]').ace_file_input('reset_input_ui');
+        });
+
+
+        if (location.protocol == 'file:')
+            alert("For uploading to server, you should access this page using 'http' protocal, i.e. via a webserver.");
+    });
+</script>
