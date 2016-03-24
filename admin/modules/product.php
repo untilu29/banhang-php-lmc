@@ -212,7 +212,7 @@ switch ($vAct) {
 <div id="deleteModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-        <form action="controllers/category.php" method="POST" class="form-horizontal">
+        <form action="controllers/product.php" method="POST" class="form-horizontal">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Delete item confirmation!</h4>
@@ -282,7 +282,7 @@ switch ($vAct) {
 //       Ajax để active hoặc unactived 1 bảng ghi
             $.ajax({
                 type: "POST",
-                url: "controllers/category.php",
+                url: "controllers/product.php",
                 data: { 'submit':'actived', 'id': id, 'actived': actived },
                 error: function(){
                     alert('Xảy ra lỗi');

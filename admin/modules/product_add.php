@@ -5,9 +5,9 @@
 </div><!-- /.page-header -->
 
 <fieldset>
-    <form action="controllers/category.php" id="form" class="form-horizontal" method="POST">
+    <form action="controllers/product.php" id="form" class="form-horizontal" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label class="col-sm-2 control-label no-padding-right" for="name">Category name<span class="required">(*)</span></label>
+            <label class="col-sm-2 control-label no-padding-right" for="name">Product name<span class="required">(*)</span></label>
             <div class="col-sm-9">
                 <input type="text" class="col-xs-10 col-sm-5" name="name" placeholder="Product name" required/>
             </div>
@@ -92,7 +92,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label no-padding-right">Description</label>
             <div class="col-sm-9">
-                <textarea class="col-xs-10 col-sm-5" rows="5" name="description" placeholder="Category description"></textarea>
+                <textarea class="col-xs-10 col-sm-5" rows="5" name="description" placeholder="Product description"></textarea>
             </div>
         </div>
 
