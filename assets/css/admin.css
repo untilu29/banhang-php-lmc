@@ -1,0 +1,38 @@
+html, body {
+
+}
+
+/*form*/
+.error {
+    line-height: 30px;
+    color: #cc0000;
+}
+
+.required {
+    color: #cc0000;
+}
+
+.form-horizontal .control-label {
+    padding-top: 4px;
+}
+
+.pagination {
+    margin: 0px;
+}
+
+.btn-info {
+    padding: 5px 10px;
+}
+
+.search_table {
+    padding: 8px 5px 9px 5px !important;
+    float: left;
+}
+
+body {
+    font-family: inherit;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: inherit;
+}
