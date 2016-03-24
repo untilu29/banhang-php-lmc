@@ -1,3 +1,9 @@
+<?php
+//Truy vấn các loại sản phẩm đưa ra vào select box
+$vSQL_PL = "SELECT * FROM category ORDER BY position ASC";
+$vResult_PL = mysql_query($vSQL_PL);
+
+?>
 <div class="page-header">
     <h1>
         Add new product

@@ -71,25 +71,49 @@ class ProductController {
 
     public function edit() {
         $id = isset($_POST['id']) ? $_POST['id'] : 0;
-        $name = isset($_POST['name']) ? $_POST['name'] : '';
-        $description = isset($_POST["description"]) ? $_POST["description"] : '';
-        $position = isset($_POST["position"]) ? $_POST["position"] : 0;
-        $actived = isset($_POST["actived"]) ? 1 : 0;
+        $category_id = isset($_POST["category_id"]) ? $_POST["category_id"] : 0;
+        $name = isset($_POST["name"]) ? $_POST["name"] : '';
+        $sku = isset($_POST["sku"]) ? $_POST["sku"] : '';
+        $price = isset($_POST["price"]) ? $_POST["price"] : 0;
+        $imageName = isset($_POST["image"]) ? $_POST["image"] : '';
+        $os = isset($_POST['os']) ? $_POST['os'] : '';
+        $screen = isset($_POST['screen']) ? $_POST['screen'] : '';
+        $cpu = isset($_POST['cpu']) ? $_POST['cpu'] : '';
+        $ram = isset($_POST['ram']) ? $_POST['ram'] : '';
+        $camera = isset($_POST['camera']) ? $_POST['camera'] : '';
+        $pin = isset($_POST['pin']) ? $_POST['pin'] : '';
+        $description = isset($_POST['description']) ? $_POST['description'] : '';
+        $actived = isset($_POST['actived']) ? 1 : 0;
 
+
+//        Phần upload hình ảnh sản phẩm
+        if ($_FILES["image"]["error"] == 0 && $_FILES["image"]["size"] > 0) {
+            //        Xoá hình ảnh cũ nếu có
+            if (isset($_POST['image_old'])) {
+                unlink("../../" . $_POST['image_old']);
+            }
+            //         Tiến hành upload hình ảnh mới
+            if (move_uploaded_file($_FILES['image']['tmp_name'], "../../uploaded_files/" . $_FILES['image']['name']))
+                $imageName = 'uploaded_files/' . $_FILES['image']['name'];
+        }
+
+        
         if (!empty($id)) {
-            $vSQL_Upd = "UPDATE category 
-			SET name = '$name', description= '$description', position=$position, actived=$actived
+            $vSQL_Upd = "UPDATE product 
+			SET name = '$name', description= '$description', category_id=$category_id, actived=$actived, 
+                            sku='$sku', price=$price, image= '$imageName', os='$os', screen='$screen', cpu='$cpu', ram='$ram', camera='$camera', pin='$pin'
 				WHERE ID=$id";
+
             mysql_query($vSQL_Upd);
             if (mysql_affected_rows() > 0) {
-                setFlash('message', "Bạn đã cập nhật một loại sản phẩm thành công!");
+                setFlash('message', "Bạn đã cập nhật sản phẩm thành công!");
                 setFlash('alert-class', 'alert-success');
             } else {
                 setFlash('message', "Thao tác không thành công!");
                 setFlash('alert-class', 'alert-danger');
             }
         }
-        return header('Location: ../?mod=category');
+        return header('Location: ../?mod=product');
     }
 
     public function delete() {
@@ -146,6 +170,7 @@ class ProductController {
             echo json_decode("Error!");
         }
     }
+
 }
 
 new ProductController();

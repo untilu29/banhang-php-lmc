@@ -2,8 +2,6 @@
 $vSQL_Edit = "SELECT * FROM category WHERE id=$vID";
 $vResult_Edit = mysql_query($vSQL_Edit);
 $vRow_Edit = mysql_fetch_array($vResult_Edit);
-$eDescription = $vRow_Edit["description"];
-$eProductTypeID = $vRow_Edit["id"];
 ?>
 <div class="page-header">
     <h1>
