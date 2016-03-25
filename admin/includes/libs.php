@@ -1,31 +1,18 @@
 <?php
 
 function login($user, $pass) {
-    $vSQL = "SELECT * FROM admin WHERE username='$user' AND password='$pass'";
+    $vSQL = "SELECT * FROM users WHERE username='$user' AND role_id=1 AND actived=1";
     $vResult = mysql_query($vSQL);
     if (mysql_num_rows($vResult) > 0) {
-        $_SESSION['username'] = $user;
-        $_SESSION['password'] = $pass;
-        return true;
+        $row = mysql_fetch_array($vResult);
+        $stored_hash_for_user = $row['password'];
+        if (Bcrypt::check($pass, $stored_hash_for_user)) {
+            $_SESSION['user_admin'] = $user;
+            $_SESSION['name'] = $row['name'];
+            return true;
+        }
     }
     return false;
-}
-
-function verify($user, $pass) {
-    $vSQL = "SELECT * FROM admin WHERE username='$user' AND password='$pass'";
-    $vResult = mysql_query($vSQL);
-    if (mysql_num_rows($vResult) > 0) {
-        return true;
-    }
-
-    return false;
-}
-
-function logout() {
-    $_SESSION['user'] = '';
-    $_SESSION['pass'] = '';
-
-    header("Location: login.php");
 }
 
 //----------- FLASH MESSAGE BEGIN---------
@@ -48,8 +35,7 @@ function setFlash($name = '', $message = '') {
     } else
         $_SESSION[$name] = $message;
 }
+
 //----------FLASH MESSAGE END------------
-
-
 ?>
 

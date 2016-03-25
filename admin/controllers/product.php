@@ -97,7 +97,7 @@ class ProductController {
                 $imageName = 'uploaded_files/' . $_FILES['image']['name'];
         }
 
-        
+
         if (!empty($id)) {
             $vSQL_Upd = "UPDATE product 
 			SET name = '$name', description= '$description', category_id=$category_id, actived=$actived, 
@@ -108,10 +108,10 @@ class ProductController {
             if (mysql_affected_rows() > 0) {
                 setFlash('message', "Bạn đã cập nhật sản phẩm thành công!");
                 setFlash('alert-class', 'alert-success');
-            } else {
-                setFlash('message', "Thao tác không thành công!");
-                setFlash('alert-class', 'alert-danger');
             }
+        } else {
+            setFlash('message', "Thao tác không thành công!");
+            setFlash('alert-class', 'alert-danger');
         }
         return header('Location: ../?mod=product');
     }

@@ -30,7 +30,7 @@
 
     <!--Users-->
     <li id="mn_users">
-        <a href="?mod=member">
+        <a href="?mod=user">
             <i class="menu-icon fa fa-user"></i>
             <span class="menu-text"> Users </span>
         </a>

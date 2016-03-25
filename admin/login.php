@@ -1,12 +1,11 @@
 <?php
 require_once "../database/connect.php";
 include_once "includes/libs.php";
+include_once '../includes/Bcrypt.php';
 
-session_start();
-$_SESSION['username'] = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-$_SESSION['password'] = isset($_SESSION['password']) ? $_SESSION['password'] : '';
+if (!session_id()) session_start();
 
-if (verify($_SESSION['username'], $_SESSION['password']) == true) {
+if (isset($_SESSION['user_admin'])) {
     header("Location: index.php");
 }
 

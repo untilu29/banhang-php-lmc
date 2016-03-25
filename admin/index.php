@@ -1,12 +1,9 @@
 <?php
 require_once "../database/connect.php";
 include_once "includes/libs.php";
-session_start();
+if (!session_id()) session_start();
 
-$_SESSION['username'] = isset($_SESSION['username'])? $_SESSION['username'] : '';
-$_SESSION['password'] = isset($_SESSION['password'])? $_SESSION['password'] : '';
-
-if(verify($_SESSION['username'], $_SESSION['password'])==false) {
+if(!isset($_SESSION['user_admin'])) {
   header("Location: login.php");
 }
 ?>

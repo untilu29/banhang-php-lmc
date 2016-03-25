@@ -23,8 +23,8 @@
                     echo'<li><a href="?mod=category">Category</a></li>'; break;
                 case 'product': 
                     echo'<li><a href="?mod=product">Product</a></li>'; break;
-                case 'member': 
-                    echo'<li><a href="?mod=member">User</a></li>'; break;
+                case 'user': 
+                    echo'<li><a href="?mod=user">User</a></li>'; break;
               }?>
 
               <?php switch ($vAct){

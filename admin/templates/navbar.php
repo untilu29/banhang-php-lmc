@@ -295,7 +295,7 @@
                 <img class="nav-user-photo" src="../assets/avatars/user.jpg" alt="Jason's Photo" />
                 <span class="user-info">
                   <small>Welcome,</small>
-                  Jason
+                  <?=$_SESSION['name']?>
                 </span>
 
                 <i class="ace-icon fa fa-caret-down"></i>
@@ -319,7 +319,7 @@
                 <li class="divider"></li>
 
                 <li>
-                  <a href="#">
+                  <a href="logout.php">
                     <i class="ace-icon fa fa-power-off"></i>
                     Logout
                   </a>
